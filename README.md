@@ -1,34 +1,50 @@
-This is a template for a [StackHead Module](https://docs.stackhead.io/stackhead-modules/stackhead-modules).
+# StackHead: Cloudflare DNS module
 
-Make sure to adjust it to your needs.
-
----
-
-# StackHead: [name] module
-
-StackHead module for [description].
+StackHead module for Cloudflare DNS.
 
 ## Installation
 
 Install it via `ansible-galaxy`:
 
 ```
-ansible-galaxy install [vendor].stackhead_[type]_[name]
+ansible-galaxy install getstackhead.stackhead_dns_cloudflare
 ```
 
-In order to use [name] with [StackHead](https://get.stackhead.io), set `stackhead__[type]` it in your inventory file:
+In order to use Cloudflare with [StackHead](https://get.stackhead.io), set `stackhead__dns` it in your inventory file:
 
 ```yaml
 # inventory for integration test
 ---
 all:
   vars:
-    # Use Nginx as webserver
-    stackhead__[type]: [vendor].stackhead_[type]_[name]
+    stackhead__dns:
+      - getstackhead.stackhead_dns_cloudflare
   hosts:
     myserver:
       ansible_host: 123.456.789 # ...
       stackhead:
         applications:
           # ...
+```
+
+
+## Configuration
+
+Make sure to provide the email and API token for Cloudflare via StackHead CLI configuration file:
+
+```yaml
+config:
+  deployment:
+    getstackhead.stackhead_dns_cloudflare:
+      cloudflare_email: my@email.address
+      cloudflare_api_token: MY-API-TOKEN
+```
+
+or Ansible inventory:
+
+```yaml
+stackhead__config_deployment:
+  getstackhead.stackhead_dns_cloudflare:
+    cloudflare_email: my@email.address
+    cloudflare_api_token: MY-API-TOKEN
 ```
