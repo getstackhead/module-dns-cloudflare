@@ -48,3 +48,12 @@ stackhead__config_deployment:
     cloudflare_email: my@email.address
     cloudflare_api_token: MY-API-TOKEN
 ```
+
+You'll also have to define the DNS provider to be used for each domain you want to set up in project definition:
+
+```yaml
+domains:
+  - domain: mydomain.com
+    dns:
+      provider: cloudflare
+```
