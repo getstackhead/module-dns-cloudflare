@@ -31,20 +31,20 @@ env:
 # You should not need to change anything below.
 
 jobs:
-  smoke:
-    name: Smoketest test-tf-generation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Ansible v2.10 alpha (GH actions currently uses 2.9)
-        run: ANSIBLE_SKIP_CONFLICT_CHECK=1 pip install --user ansible==2.10.0a9 && ansible --version
-      - name: Get latest StackHead version
-        run: ansible-galaxy collection install git+https://github.com/getstackhead/stackhead.git,next -f
-      - run: ansible-playbook ./__tests__/test-tf-generation.yml
+  #smoke:
+  #  name: Smoketest test-tf-generation
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v2
+  #    - name: Install Ansible v2.10 alpha (GH actions currently uses 2.9)
+  #      run: ANSIBLE_SKIP_CONFLICT_CHECK=1 pip install --user ansible==2.10.0a9 && ansible --version
+  #    - name: Get latest StackHead version
+  #      run: ansible-galaxy collection install git+https://github.com/getstackhead/stackhead.git,next -f
+  #    - run: ansible-playbook ./__tests__/test-tf-generation.yml
 
   checkLabel:
     name: Please request integration test and review
-    needs: smoke
+    #needs: smoke
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
     steps:
