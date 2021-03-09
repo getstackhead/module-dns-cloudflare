@@ -21,15 +21,11 @@ on:
     branches: [master]
 
 env:
-  # todo: set your role name here
-  ROLE_NAME: <vendor>.stackhead_<type>_<name>
-  # todo: software to use as webserver
-  WEBSERVER: getstackhead.stackhead_webserver_nginx # if your module is a webserver module, set its name here
-  # todo: software to use as container provider
-  CONTAINER: getstackhead.stackhead_container_docker # if your module is a container module, set its name here
-  # todo: adjust domain name
-  DOMAIN_NAME: "pr-${{ github.run_id }}-myname"
-  # domain name
+  ROLE_NAME: getstackhead.stackhead_dns_cloudflare
+  DNS: getstackhead.stackhead_dns_cloudflare
+  WEBSERVER: getstackhead.stackhead_webserver_nginx
+  CONTAINER: getstackhead.stackhead_container_docker
+  DOMAIN_NAME: "pr-${{ github.run_id }}-cloudflare"
   DOMAIN_SUFFIX: "test.stackhead.io"
 
 # You should not need to change anything below.
@@ -112,6 +108,7 @@ jobs:
         domain2: 'sub.${{ env.DOMAIN_NAME }}.${{ env.DOMAIN_SUFFIX }}'
         webserver: '${{ env.WEBSERVER }}'
         container: '${{ env.CONTAINER }}'
+        dns: '${{ env.DNS }}'
         rolename: '${{ env.ROLE_NAME }}'
     - name: Remove DNS record
       uses: saitho/delete-dns-record@saitho-patch-1

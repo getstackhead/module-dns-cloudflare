@@ -1,11 +1,11 @@
-# This task configures the required DNS records for the given domains.
+# This task removes the DNS configurations for the given domains.
 ---
 - name: Check Cloudflare credentials
   assert:
     that:
       - module.config.cloudflare_email|d("") != ""
       - module.config.cloudflare_api_token|d("") != ""
-- name: "Create A record for domain {{ item.domain }}"
+- name: "Remove A record for domain {{ item.domain }}"
   cloudflare_dns:
     zone: "{{ item.domain|domain }}"
     record: "{{ item.domain|subdomain|d('@', true) }}"
@@ -13,8 +13,6 @@
     value: "{{ ansible_ssh_host }}"
     account_email: "{{ module.config.cloudflare_email }}"
     account_api_token: "{{ module.config.cloudflare_api_token }}"
-    proxied: no
-    solo: yes
-    state: present
+    state: absent
   when: item.dns.provider|d('') == 'cloudflare'
   with_items: "{{ app_config.domains }}" # item.domain
