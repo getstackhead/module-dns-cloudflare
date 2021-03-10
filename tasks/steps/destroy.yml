@@ -7,8 +7,8 @@
       - module.config.cloudflare_api_token|d("") != ""
 - name: "Remove A record for domain {{ item.domain }}"
   cloudflare_dns:
-    zone: "{{ item.domain|domain }}"
-    record: "{{ item.domain|subdomain|d('@', true) }}"
+    zone: "{{ item.domain|getstackhead.stackhead.domain }}"
+    record: "{{ item.domain|getstackhead.stackhead.subdomain|d('@', true) }}"
     type: A
     value: "{{ ansible_ssh_host }}"
     account_email: "{{ module.config.cloudflare_email }}"
