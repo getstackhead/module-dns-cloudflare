@@ -30,13 +30,15 @@ all:
 
 ## Configuration
 
-Make sure to provide the email and API token for Cloudflare via StackHead CLI configuration file:
+Make sure to provide the API token for Cloudflare via StackHead CLI configuration file.
+
+You can generate an API token [in your Cloudflare profile](https://dash.cloudflare.com/profile/api-tokens).
+Make sure to grant `write` permissions to DNS on Zone level.
 
 ```yaml
 config:
   deployment:
     getstackhead.stackhead_dns_cloudflare:
-      cloudflare_email: my@email.address
       cloudflare_api_token: MY-API-TOKEN
 ```
 
@@ -45,7 +47,6 @@ or Ansible inventory:
 ```yaml
 stackhead__config_deployment:
   getstackhead.stackhead_dns_cloudflare:
-    cloudflare_email: my@email.address
     cloudflare_api_token: MY-API-TOKEN
 ```
 
