@@ -89,7 +89,6 @@ jobs:
         webserver: '${{ env.WEBSERVER }}'
         container: '${{ env.CONTAINER }}'
         dns: '${{ env.DNS }}'
-        dns_cloudflare_email: '${{ secrets.CLOUDFLARE_EMAIL }}'
         dns_cloudflare_apitoken: '${{ secrets.CLOUDFLARE_TOKEN }}'
         rolename: '${{ env.ROLE_NAME }}'
     - name: Remove Hetzner server

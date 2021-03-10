@@ -3,7 +3,6 @@
 - name: Check Cloudflare credentials
   assert:
     that:
-      - module.config.cloudflare_email|d("") != ""
       - module.config.cloudflare_api_token|d("") != ""
 - name: "Remove A record for domain {{ item.domain }}"
   cloudflare_dns:
@@ -11,8 +10,7 @@
     record: "{{ item.domain|getstackhead.stackhead.subdomain|d('@', true) }}"
     type: A
     value: "{{ ansible_ssh_host }}"
-    account_email: "{{ module.config.cloudflare_email }}"
-    account_api_token: "{{ module.config.cloudflare_api_token }}"
+    api_token: "{{ module.config.cloudflare_api_token }}"
     state: absent
   when: item.dns.provider|d('') == 'cloudflare'
   with_items: "{{ app_config.domains }}" # item.domain
