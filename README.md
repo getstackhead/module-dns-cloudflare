@@ -4,6 +4,8 @@ StackHead module for Cloudflare DNS.
 
 ## Installation
 
+### Ansible
+
 Install it via `ansible-galaxy`:
 
 ```
@@ -27,12 +29,11 @@ all:
           # ...
 ```
 
-
 ## Configuration
 
-Make sure to provide the API token for Cloudflare via StackHead CLI configuration file.
+### API Token
 
-You can generate an API token [in your Cloudflare profile](https://dash.cloudflare.com/profile/api-tokens).
+Make sure to provide the API token for Cloudflare. You can generate an API token [in your Cloudflare profile](https://dash.cloudflare.com/profile/api-tokens).
 Make sure to grant `write` permissions to DNS on Zone level.
 
 ```yaml
@@ -49,6 +50,8 @@ stackhead__config_deployment:
   getstackhead.stackhead_dns_cloudflare:
     cloudflare_api_token: MY-API-TOKEN
 ```
+
+### Domain setting
 
 You'll also have to define the DNS provider to be used for each domain you want to set up in project definition:
 

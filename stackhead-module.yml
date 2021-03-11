@@ -1,2 +1,4 @@
 ---
+constraints:
+  - stackhead>=1.3.0
 type: dns
