@@ -1,0 +1,27 @@
+# required vars:
+#   - domain
+#   - value
+#   - state
+# optional vars:
+#   - proxied
+#   - solo
+---
+- cloudflare_dns:
+    zone: "{{ domain|getstackhead.stackhead.domain }}"
+    record: "{{ domain|getstackhead.stackhead.subdomain|d('@', true) }}"
+    type: SPF
+    value: "{{ value }}"
+    api_token: "{{ module.config.cloudflare_api_token }}"
+    proxied: "{{ proxied|d(false) }}"
+    solo: "{{ solo|d(true) }}"
+    state: present
+  when: state == 'present'
+- cloudflare_dns:
+    zone: "{{ domain|getstackhead.stackhead.domain }}"
+    record: "{{ domain|getstackhead.stackhead.subdomain|d('@', true) }}"
+    type: SPF
+    value: "{{ value }}"
+    api_token: "{{ module.config.cloudflare_api_token }}"
+    proxied: "{{ proxied|d(false) }}"
+    state: "{{ state }}"
+  when: state != 'present'

@@ -4,17 +4,10 @@ name: Release
 # This release workflow requires the following environment variables:
 # - galaxy_api_key (API key for Ansible Galaxy)
 
-# disable GH action for template
-# remove and uncommment below "on" block when using in production
 on:
   push:
-    branches-ignore:
-      - '**'
-
-#on:
-#  push:
-#    branches:
-#    - master
+    branches:
+    - master
 
 jobs:
   release:

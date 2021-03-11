@@ -5,14 +5,9 @@
     that:
       - module.config.cloudflare_api_token|d("") != ""
 - name: "Create A record for domain {{ item.domain }}"
-  cloudflare_dns:
-    zone: "{{ item.domain|getstackhead.stackhead.domain }}"
-    record: "{{ item.domain|getstackhead.stackhead.subdomain|d('@', true) }}"
-    type: A
-    value: "{{ ansible_ssh_host }}"
-    api_token: "{{ module.config.cloudflare_api_token }}"
-    proxied: no
-    solo: yes
+  include_tasks: "{{ module_role_path | default(role_path) }}/tasks/steps/records/a.yml"
+  vars:
+    domain: "{{ item.domain }}"
     state: present
-  when: item.dns.provider|d('') == 'cloudflare'
+  when: item.dns.provider|d('') == 'getstackhead.stackhead_dns_cloudflare'
   with_items: "{{ app_config.domains }}" # item.domain

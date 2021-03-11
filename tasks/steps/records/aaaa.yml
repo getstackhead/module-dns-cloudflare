@@ -1,0 +1,26 @@
+# required vars:
+#   - domain
+#   - state
+# optional vars:
+#   - proxied
+#   - solo
+---
+- cloudflare_dns:
+    zone: "{{ domain|getstackhead.stackhead.domain }}"
+    record: "{{ domain|getstackhead.stackhead.subdomain|d('@', true) }}"
+    type: AAAA
+    value: "{{ ansible_ssh_host }}"
+    api_token: "{{ module.config.cloudflare_api_token }}"
+    proxied: "{{ proxied|d(false) }}"
+    solo: "{{ solo|d(true) }}"
+    state: present
+  when: state == 'present'
+- cloudflare_dns:
+    zone: "{{ domain|getstackhead.stackhead.domain }}"
+    record: "{{ domain|getstackhead.stackhead.subdomain|d('@', true) }}"
+    type: AAAA
+    value: "{{ ansible_ssh_host }}"
+    api_token: "{{ module.config.cloudflare_api_token }}"
+    proxied: "{{ proxied|d(false) }}"
+    state: "{{ state }}"
+  when: state != 'present'

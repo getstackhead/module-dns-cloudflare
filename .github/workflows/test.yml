@@ -81,7 +81,7 @@ jobs:
         wait_for_ssh: 1
       env:
         API_TOKEN: ${{ secrets.HETZNER_TOKEN }}
-    - uses: getstackhead/stackhead/actions/integration-test@feature/dns-support
+    - uses: getstackhead/stackhead/actions/integration-test@next
       with:
         ipaddress: ${{ steps.setup_server.outputs.hcloud_server_created_ipv4 }}
         domain: '${{ env.DOMAIN_NAME }}.${{ env.DOMAIN_SUFFIX }}'
